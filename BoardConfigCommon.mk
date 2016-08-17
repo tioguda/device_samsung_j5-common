@@ -91,8 +91,8 @@ TARGET_POWERHAL_VARIANT := qcom
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
-# Enable HW based full disk encryption
-TARGET_HW_DISK_ENCRYPTION := true
+# Filesystem
+TARGET_ANDROID_FILESYSTEM_CONFIG_H := device/samsung/j5-common/android_filesystem_config.h
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
