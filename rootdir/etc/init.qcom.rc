@@ -101,6 +101,11 @@ on early-boot
     # session is not exercised through RemoteDisplay in the android framework
     setprop persist.sys.wfd.virtual 0
 
+    # Remove symlinks to avoid issues with migrate after nandroid restores
+    # Will be recreated at end of boot
+    rm /data/data/com.android.providers.telephony/databases/telephony.db
+    rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
+
 on boot
     # Bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -405,6 +410,12 @@ on boot
     # OTG Test
     chown system radio /sys/class/host_notify/usb_otg/booster
     chmod 0660 /sys/class/host_notify/usb_otg/booster
+
+    # Symlink telephony.db and preferred-apn.xml
+    mkdir /data/data/com.android.providers.telephony/databases 0700 radio radio
+    mkdir /data/data/com.android.providers.telephony/shared_prefs 0700 radio radio
+    symlink /data/user_de/0/com.android.providers.telephony/databases/telephony.db /data/data/com.android.providers.telephony/databases/telephony.db
+    symlink /data/user_de/0/com.android.providers.telephony/shared_prefs/preferred-apn.xml /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
 
     # GPIO keys
     chmod 0660 /sys/class/input/input7/enabled
