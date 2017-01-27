@@ -163,6 +163,8 @@ static char *camera_fixup_setparams(struct camera_device *device, const char *se
     params.dump();
 #endif
 
+    params.set(android::CameraParameters::KEY_PREVIEW_FPS_RANGE, "7500,30000");
+
     const char *recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
     bool isVideo = recordingHint && !strcmp(recordingHint, "true");
 
