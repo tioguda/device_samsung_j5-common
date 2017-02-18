@@ -83,6 +83,11 @@ on early-boot
     #chown root audio /sys/kernel/boot_adsp/boot
     setprop qcom.audio.init complete
     #setprop service.qti.ims.enabled 1
+	
+    # Remove symlinks to avoid issues with migrate after nandroid restores
+    # Will be recreated at end of boot
+    rm /data/data/com.android.providers.telephony/databases/telephony.db
+    rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
 
 on boot
     # Bluetooth
@@ -408,6 +413,12 @@ on boot
 
     # Start qcamerasvr
     start qcamerasvr
+	
+    # Symlink telephony.db and preferred-apn.xml
+    mkdir /data/data/com.android.providers.telephony/databases 0700 radio radio
+    mkdir /data/data/com.android.providers.telephony/shared_prefs 0700 radio radio
+    symlink /data/user_de/0/com.android.providers.telephony/databases/telephony.db /data/data/com.android.providers.telephony/databases/telephony.db
+    symlink /data/user_de/0/com.android.providers.telephony/shared_prefs/preferred-apn.xml /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
 
 # msm specific files that need to be created on /data
 on post-fs-data
