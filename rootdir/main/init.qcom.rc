@@ -544,10 +544,6 @@ on post-fs-data
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
 
-    #Create FM dir for patchdownloader
-    mkdir /data/misc/fm 0770 system system
-    chmod 0770 /data/misc/fm
-
     # sec_efs_file
     mkdir /efs/sec_efs 0775 radio system
 
@@ -866,10 +862,3 @@ service ril-daemon1 /system/bin/rild -l /system/lib/libsec-ril-dsds.so -c 2
     user root
     disabled
     group radio cache inet misc audio log qcom_diag system drmrpc sdcard_r sdcard_rw shell
-
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system
-    disabled
-    oneshot
