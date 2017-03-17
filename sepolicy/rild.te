@@ -4,4 +4,3 @@ allow rild mnt_user_file:lnk_file read;
 allow rild mnt_user_file:dir search;
 allow rild storage_file:lnk_file read;
 allow rild system_app_data_file:file { read write getattr open lock };
-
