@@ -275,10 +275,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=J5RIL
 
 # Camera
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    camera2.portability.force_api=1 \
-#    media.stagefright.legacyencoder=true \
-#    media.stagefright.less-secure=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1 \
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true
 
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
