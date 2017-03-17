@@ -130,6 +130,7 @@ on boot
 
     mkdir /persist/drm 0770 system system
     mkdir /persist/misc 0770 system system
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
 
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -626,17 +627,16 @@ service rmt_storage /system/bin/rmt_storage
     class core
     user root
     group system
+	
+service config_bt_addr /system/bin/btnvtool -O
+    class core
+    user bluetooth
+    group bluetooth radio
 
 service rfs_access /system/bin/rfs_access
    class core
    user system
    group system net_raw
-
-service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
-    class core
-    user root
-    seclabel u:r:bluetooth_loader:s0
-    oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
@@ -645,9 +645,6 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     disabled
     seclabel u:r:bluetooth_loader:s0
     oneshot
-
-on property:vold.decrypt=trigger_restart_framework
-    start config_bluetooth
 
 on property:bluetooth.hciattach=true
     start hciattach
