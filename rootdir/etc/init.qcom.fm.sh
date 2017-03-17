@@ -66,7 +66,8 @@ case $mode in
   "normal")
     case $TRANSPORT in
     "smd")
-        logi "Starting QCOM FMRadio!!"
+        logi "inserting the radio transport module"
+        insmod /system/lib/modules/radio-iris-transport.ko
      ;;
      *)
         logi "default transport case "
