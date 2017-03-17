@@ -649,11 +649,6 @@ service config_bt_addr /system/bin/btnvtool -O
     user bluetooth
     group bluetooth radio
 
-service rfs_access /system/bin/rfs_access
-   class core
-   user system
-   group system net_raw
-
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
