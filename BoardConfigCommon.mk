@@ -38,6 +38,9 @@ TARGET_CPU_CORTEX_A53 := true
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/j5-common/include
 
+# Text Relocations
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+
 # Kernel
 TARGET_KERNEL_ARCH           := arm
 BOARD_DTBTOOL_ARG            := -2
