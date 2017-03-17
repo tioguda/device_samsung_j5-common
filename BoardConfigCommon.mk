@@ -140,7 +140,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE := true
 TARGET_USES_QCOM_BSP := true
 TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
+TARGET_GLOBAL_CFLAGS += -DQCOM_BSP
 BOARD_USES_QC_TIME_SERVICES := true
 
 # Added to indicate that protobuf-c is supported in this build
@@ -206,3 +206,7 @@ TW_INCLUDE_CRYPTO := true
 TW_NO_USB_STORAGE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_RECOVERY_SWIPE := true
+
+# Toolchain
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
