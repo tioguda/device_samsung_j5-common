@@ -17,12 +17,6 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#include <cutils/properties.h>
-#include <string.h>
-
 #define BTM_DEF_LOCAL_NAME   "Galaxy J5"
 #define BTA_DISABLE_DELAY 1000 /* in milliseconds */
-#define BLUETOOTH_QTI_SW TRUE
-#define MAX_L2CAP_CHANNELS    16
-#define BLE_VND_INCLUDED   TRUE
 #endif
