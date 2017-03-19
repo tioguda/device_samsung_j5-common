@@ -93,6 +93,13 @@ ro.qualcomm.bluetooth.nap=true
 ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
 
+# IMS
+persist.radio.jbims=1
+persist.radio.ROTATION_ENABLE=1
+persist.radio.VT_ENABLE=1
+persist.radio.VT_HYBRID_ENABLE=1
+persist.radio.VT_USE_MDM_TIME=0
+
 # Misc.
 ro.chipname=MSM8916
 ro.warmboot.capability=1
