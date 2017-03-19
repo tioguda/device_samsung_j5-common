@@ -286,7 +286,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Recovery
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
+    $(LOCAL_PATH)/configs/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 # Common qcom
 $(call inherit-product, device/samsung/qcom-common/qcom-common.mk)
