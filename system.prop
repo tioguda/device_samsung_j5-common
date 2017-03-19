@@ -1,7 +1,6 @@
 # RIL
 rild.libpath=/system/lib/libsec-ril.so
 #rild.libpath=/system/lib/libreference-ril.so
-persist.radio.jbims=1
 rild.libargs=-d /dev/smd0
 ro.ril.transmitpower=true
 persist.radio.add_power_save=1
