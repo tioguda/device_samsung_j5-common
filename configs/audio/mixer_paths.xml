@@ -264,7 +264,7 @@
     <path name="low-latency-playback transmission-fm">
         <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia5" value="1" />
     </path>
-
+	
     <path name="low-latency-playback speaker-and-bt-sco">
 	<path name="low-latency-playback bt-sco" />
 	<path name="low-latency-playback" />
@@ -733,13 +733,13 @@
 
     <path name="speaker">
         <path name="spk" />
-        <ctl name="RX3 Digital Volume" value="84" />
+        <ctl name="RX3 Digital Volume" value="82" />
     </path>
 
     <path name="headset">
         <path name="ear" />
-        <ctl name="RX1 Digital Volume" value="84" />
-        <ctl name="RX2 Digital Volume" value="84" />
+        <ctl name="RX1 Digital Volume" value="80" />
+        <ctl name="RX2 Digital Volume" value="80" />
     </path>
 
     <path name="dock">
@@ -751,8 +751,8 @@
 
     <path name="headphones">
         <path name="ear" />
-        <ctl name="RX1 Digital Volume" value="84" />
-        <ctl name="RX2 Digital Volume" value="84" />
+        <ctl name="RX1 Digital Volume" value="81" />
+        <ctl name="RX2 Digital Volume" value="81" />
         <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
     </path>
 
@@ -760,7 +760,7 @@
         <path name="spk-ear" />
         <ctl name="RX1 Digital Volume" value="62" />
         <ctl name="RX2 Digital Volume" value="62" />
-        <ctl name="RX3 Digital Volume" value="84" />
+        <ctl name="RX3 Digital Volume" value="82" />
         <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
     </path>
 
@@ -778,7 +778,7 @@
 	<path name="spk-lineout" />
         <ctl name="RX1 Digital Volume" value="56" />
         <ctl name="RX2 Digital Volume" value="56" />
-        <ctl name="RX3 Digital Volume" value="84" />
+        <ctl name="RX3 Digital Volume" value="81" />
         <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
     </path>
 
@@ -789,8 +789,8 @@
 
     <path name="fm-headset">
         <path name="ear" />
-        <ctl name="RX1 Digital Volume" value="78" />
-        <ctl name="RX2 Digital Volume" value="78" />
+        <ctl name="RX1 Digital Volume" value="84" />
+        <ctl name="RX2 Digital Volume" value="84" />
         <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
