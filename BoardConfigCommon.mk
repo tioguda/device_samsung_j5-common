@@ -55,7 +55,7 @@ BOARD_FLASH_BLOCK_SIZE       := 131072
 BLOCK_BASED_OTA              := false
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/j5-common/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/j5-common/configs/bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_HAVE_SAMSUNG_BLUETOOTH := true
@@ -83,7 +83,7 @@ BOARD_RIL_CLASS := ../../../device/samsung/j5-common/ril/
 USE_DEVICE_SPECIFIC_DATASERVICES := true
 
 # PowerHAL
-TARGET_POWERHAL_SET_INTERACTIVE_EXT := device/samsung/j5-common/power/power_ext.c
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := device/samsung/j5-common/configs/power/power_ext.c
 TARGET_POWERHAL_VARIANT := qcom
 #WITH_QC_PERF := true
 
@@ -182,7 +182,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Storage
 #RECOVERY_VARIANT := twrp
-#TARGET_RECOVERY_FSTAB := device/samsung/j5-common/recovery/twrp.fstab
+#TARGET_RECOVERY_FSTAB := device/samsung/j5-common/configs/recovery/twrp.fstab
 TARGET_RECOVERY_FSTAB := device/samsung/j5-common/rootdir/main/fstab.qcom
 TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
