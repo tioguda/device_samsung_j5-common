@@ -35,9 +35,6 @@ persist.dpm.feature=0
 ro.use_data_netmgrd=false
 persist.data.netmgrd.qos.enable=false
 
-# Symlink /data/media to /sdcard
-persist.fuse_sdcard=true
-
 # Display
 debug.sf.hw=1
 debug.egl.hw=1
@@ -51,6 +48,9 @@ vidc.enc.narrow.searchrange=1
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+
+#sdcardfs
+ro.sys.sdcardfs=true
 
 # Audio
 audio.offload.video=true
