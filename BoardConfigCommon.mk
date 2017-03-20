@@ -150,6 +150,9 @@ PROTOBUF_SUPPORTED := true
 TARGET_QCOM_MEDIA_VARIANT := caf
 #TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
+# Enable HW based full disk encryption
+TARGET_HW_DISK_ENCRYPTION := true
+
 # Display
 BOARD_EGL_CFG := device/samsung/j5-common/configs/egl.cfg
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
