@@ -73,10 +73,10 @@ AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
 USE_CUSTOM_AUDIO_POLICY := 1
 TARGET_QCOM_AUDIO_VARIANT := caf
 
-# FM
-AUDIO_FEATURE_ENABLED_FM := true
+# Enable QCOM FM feature
 TARGET_QCOM_NO_FM_FIRMWARE := true
 BOARD_HAVE_QCOM_FM := true
+AUDIO_FEATURE_ENABLED_FM := true
 
 # Custom RIL class
 BOARD_RIL_CLASS := ../../../device/samsung/j5-common/ril/
