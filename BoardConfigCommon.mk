@@ -65,7 +65,8 @@ BLUETOOTH_HCI_USE_MCT := true
 EXTENDED_FONT_FOOTPRINT := true
 
 # CMHW
-BOARD_HARDWARE_CLASS += device/samsung/j5-common/cmhw
+BOARD_USES_CYANOGEN_HARDWARE := true
+BOARD_HARDWARE_CLASS += hardware/cyanogen/cmhw
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
