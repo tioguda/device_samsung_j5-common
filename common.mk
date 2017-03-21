@@ -93,11 +93,6 @@ PRODUCT_PACKAGES += \
     libstlport \
     libboringssl-compat \
     libmm-qcamera
-    
-# RIL
-PRODUCT_PACKAGES += \
-    libcnefeatureconfig \
-    librmnetctl \
 
 # GPS HAL
 PRODUCT_PACKAGES += \
