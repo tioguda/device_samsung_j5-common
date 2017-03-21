@@ -97,7 +97,7 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
-    librmnetctl
+    librmnetctl \
 
 # GPS HAL
 PRODUCT_PACKAGES += \
