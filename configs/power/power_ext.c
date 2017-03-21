@@ -22,10 +22,10 @@
 #include <utils/Log.h>
 
 /* touchkeys */
-#define TK_POWER "/sys/class/input/input1/enabled"
+#define TK_POWER "/sys/class/input/input2/enabled"
 
 /* touchscreen */
-#define TS_POWER "/sys/class/input/input2/enabled"
+#define TS_POWER "/sys/class/input/input4/enabled"
 
 /* gpio keys */
 #define GPIO_KEYS_POWER "/sys/class/input/input7/enabled"
