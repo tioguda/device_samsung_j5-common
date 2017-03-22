@@ -41,6 +41,9 @@ TARGET_SPECIFIC_HEADER_PATH := device/samsung/j5-common/include
 # Text Relocations
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
+# Sensors
+TARGET_NO_SENSOR_PERMISSION_CHECK := true
+
 # Kernel
 TARGET_KERNEL_ARCH           := arm
 BOARD_DTBTOOL_ARG            := -2
@@ -162,6 +165,11 @@ MAX_VIRTUAL_DISPLAY_DIMENSION := 2048
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
+# TWRP Support - Optional
+ifeq ($(WITH_TWRP),true)
+-include $(LOCAL_PATH)/twrp.mk
+endif
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
@@ -171,40 +179,17 @@ BOARD_SEPOLICY_DIRS += \
 # Misc.
 TARGET_SYSTEM_PROP := device/samsung/j5-common/system.prop
 
-# TWRP
-# Display
-TW_THEME := portrait_hdpi
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TW_BRIGHTNESS_PATH := "/sys/devices/soc.0/1a00000.qcom\x2cmdss_mdp/qcom\x2cmdss_fb_primary.137/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 255
-TW_NEW_ION_HEAP := true
-TW_TARGET_USES_QCOM_BSP := true
-
 # Keys
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Storage
-#RECOVERY_VARIANT := twrp
-#TARGET_RECOVERY_FSTAB := device/samsung/j5-common/configs/recovery/twrp.fstab
 TARGET_RECOVERY_FSTAB := device/samsung/j5-common/rootdir/main/fstab.qcom
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_MTP_DEVICE := "/dev/mtp_usb"
-BOARD_MTP_DEVICE := "/dev/mtp_usb"
-RECOVERY_SDCARD_ON_DATA := true
 
 # Misc.
 BOARD_USES_MMC_UTILS := true
 BOARD_SUPPRESS_EMMC_WIPE := true
 BOARD_HAS_NO_MISC_PARTITION := true
-TW_HAS_DOWNLOAD_MODE := true
-TW_NO_REBOOT_BOOTLOADER := true
-TW_INCLUDE_CRYPTO := true
-TW_NO_USB_STORAGE := true
-TARGET_RECOVERY_QCOM_RTC_FIX := true
+
 BOARD_RECOVERY_SWIPE := true
 
 # Toolchain

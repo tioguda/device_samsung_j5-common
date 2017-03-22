@@ -287,10 +287,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     persist.sys.isUsbOtgEnabled=true
 
-# Recovery
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
-
 # Common qcom
 $(call inherit-product, device/samsung/qcom-common/qcom-common.mk)
 
