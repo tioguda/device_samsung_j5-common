@@ -195,6 +195,7 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_MTP_DEVICE := "/dev/mtp_usb"
 BOARD_MTP_DEVICE := "/dev/mtp_usb"
 RECOVERY_SDCARD_ON_DATA := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Misc.
 BOARD_USES_MMC_UTILS := true
