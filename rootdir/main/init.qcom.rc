@@ -796,7 +796,7 @@ service qcom-sh /system/bin/sh /init.qcom.sh
     user root
     oneshot
 
-service qcom-post-boot /system/bin/sh /init.qcom.post_boot.sh
+service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     class late_start
     user root
     disabled
@@ -805,7 +805,7 @@ service qcom-post-boot /system/bin/sh /init.qcom.post_boot.sh
 on property:sys.boot_completed=1
     start qcom-post-boot
 
-service sec-sh /system/bin/sh /init.sec.boot.sh
+service sec-sh /system/bin/sh /system/etc/init.sec.boot.sh
     class main
     user root
     oneshot	
