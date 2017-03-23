@@ -130,10 +130,7 @@ PRODUCT_PACKAGES += \
 
 # Configuration scripts
 PRODUCT_PACKAGES += \
-    init.qcom.bt.sh \
-    init.qcom.post_boot.sh \
-    init.qcom.sh \
-    init.sec.boot.sh
+    init.qcom.bt.sh
 
 # Ramdisk
 PRODUCT_PACKAGES += \
