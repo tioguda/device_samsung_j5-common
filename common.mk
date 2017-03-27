@@ -85,6 +85,10 @@ PRODUCT_PACKAGES += \
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8916
+   
+# Healthd packages
+PRODUCT_PACKAGES += \
+	charger_res_images
 
 # Camera
 PRODUCT_PACKAGES += \
