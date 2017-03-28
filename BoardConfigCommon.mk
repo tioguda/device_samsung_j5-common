@@ -44,7 +44,7 @@ TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 # Kernel
 TARGET_KERNEL_ARCH           := arm
 BOARD_DTBTOOL_ARG            := -2
-BOARD_KERNEL_CMDLINE         := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE         := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci
 BOARD_KERNEL_BASE            := 0x80000000
 BOARD_KERNEL_OFFSET          := 0x00008000
 BOARD_RAMDISK_OFFSET         := 0x02000000
@@ -73,11 +73,6 @@ BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
 USE_CUSTOM_AUDIO_POLICY := 1
 TARGET_QCOM_AUDIO_VARIANT := caf
-
-# Enable QCOM FM feature
-TARGET_QCOM_NO_FM_FIRMWARE := true
-BOARD_HAVE_QCOM_FM := true
-AUDIO_FEATURE_ENABLED_FM := true
 
 # Custom RIL class
 BOARD_RIL_CLASS := ../../../device/samsung/j5-common/ril/
