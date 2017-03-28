@@ -88,7 +88,7 @@ PRODUCT_PACKAGES += \
    
 # Healthd packages
 PRODUCT_PACKAGES += \
-	charger_res_images
+    charger_res_images
 
 # Camera
 PRODUCT_PACKAGES += \
