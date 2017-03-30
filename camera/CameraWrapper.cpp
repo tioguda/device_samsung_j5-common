@@ -138,6 +138,9 @@ static char *camera_fixup_getparams(int id, const char *settings)
         params.set(KEY_VIDEO_HFR_VALUES, tmp);
     }
 
+    params.set(android::CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
+              "1920x1080,1280x720,640x360,640x480,320x240,176x144");
+        
     /* Enforce video-snapshot-supported to true */
     params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
 
@@ -163,6 +166,9 @@ static char *camera_fixup_setparams(struct camera_device *device, const char *se
     params.dump();
 #endif
 
+    params.set(android::CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
+              "1920x1080,1280x720,640x360,640x480,320x240,176x144");
+        
     const char *recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
     bool isVideo = recordingHint && !strcmp(recordingHint, "true");
 
