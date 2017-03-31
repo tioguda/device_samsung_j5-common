@@ -68,7 +68,7 @@ EXTENDED_FONT_FOOTPRINT := true
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += \
     hardware/cyanogen/cmhw \
-    $(VENDOR_PATH)/cmhw
+    $(LOCAL_PATH)/cmhw
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
