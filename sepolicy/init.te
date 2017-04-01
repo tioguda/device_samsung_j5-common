@@ -4,6 +4,7 @@ allow init debugfs:dir mounton;
 allow init socket_device:sock_file create_file_perms;
 allow sysinit rootfs:lnk_file r_file_perms;
 allow init clatd_exec:file getattr;
+allow init sysfs_touchscreen:file setattr;
 allow init dex2oat_exec:file getattr;
 allow init dnsmasq_exec:file getattr;
 allow init hostapd_exec:file getattr;
