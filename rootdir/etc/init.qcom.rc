@@ -69,39 +69,6 @@ on fs
     chmod 0666 /dev/i2c-1
     chown system system /dev/i2c-1
 	
-    # for TRP/TIS
-    write /data/.psm.info 1
-    chown system root /data/.psm.info
-    chmod 0660 /data/.psm.info
-
-    # MTP permission
-    chmod 0660 /dev/usb_mtp_gadget
-    chown system mtp /dev/usb_mtp_gadget
-
-    # symlink to bugreport storage location
-    symlink /data/data/com.android.shell/files/bugreports /data/bugreports
-
-    # Permissions for svc led
-    chown system system /sys/class/sec/led/led_r
-    chown system system /sys/class/sec/led/led_g
-    chown system system /sys/class/sec/led/led_b
-    chown system system /sys/class/sec/led/led_pattern
-    chown system system /sys/class/sec/led/led_blink
-    chown system system /sys/class/sec/led/led_lowpower
-
-    # IR_LED
-    chown system radio /sys/class/sec/sec_ir/ir_send
-    chown system radio /sys/class/sec/sec_ir/ir_send_result
-    chown system system /dev/ice4_dev
-    chmod 0660 /dev/ice4_dev
-
-    chown system camera /sys/class/flash/flash/flash_power
-    chmod 660 /sys/class/flash/flash/flash_power
-
-    # Create directories for perfd
-    mkdir /data/misc/perfd 2755 root system
-    mkdir /data/system/perfd 2770 root system
-
     # Remove symlinks to avoid issues with migrate after nandroid restores
     # Will be recreated at end of boot
     # Normal path
@@ -115,8 +82,6 @@ on fs
     rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
     rmdir /data/data/com.android.providers.telephony/databases
     rmdir /data/data/com.android.providers.telephony/shared_prefs
-
-    setprop vold.post_fs_data_done 1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
