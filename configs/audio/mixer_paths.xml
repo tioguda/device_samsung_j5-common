@@ -265,6 +265,14 @@
         <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 	
+	<path name="jam-framework-playback">
+        <ctl name="PRI_MI2S_RX Audio Mixer MultiMedia17" value="1" />
+    </path>
+
+    <path name="jam-framework-playback speaker-amp">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia17" value="1" />
+    </path>
+    
     <path name="low-latency-playback speaker-and-bt-sco">
 	<path name="low-latency-playback bt-sco" />
 	<path name="low-latency-playback" />
@@ -338,6 +346,10 @@
 
     <path name="fm-virtual-record capture-fm">
         <ctl name="MultiMedia2 Mixer INTERNAL_FM_TX" value="1" />
+    </path>
+	 
+	<path name="jam-framework-capture">
+        <ctl name="MultiMedia17 Mixer TERT_MI2S_TX" value="1" />
     </path>
 
     <!-- call part -->
