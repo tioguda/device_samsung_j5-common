@@ -260,7 +260,6 @@ PRODUCT_PACKAGES += \
 
 # WPA supplicant
 PRODUCT_PACKAGES += \
-    dhcpcd.conf \
     libwpa_client \
     wpa_supplicant \
     wpa_supplicant.conf
