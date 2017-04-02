@@ -68,55 +68,6 @@ on fs
     # Audio NXP
     chmod 0666 /dev/i2c-1
     chown system system /dev/i2c-1
-	
-    # for TRP/TIS
-    write /data/.psm.info 1
-    chown system root /data/.psm.info
-    chmod 0660 /data/.psm.info
-
-    # MTP permission
-    chmod 0660 /dev/usb_mtp_gadget
-    chown system mtp /dev/usb_mtp_gadget
-
-    # symlink to bugreport storage location
-    symlink /data/data/com.android.shell/files/bugreports /data/bugreports
-
-    # Permissions for svc led
-    chown system system /sys/class/sec/led/led_r
-    chown system system /sys/class/sec/led/led_g
-    chown system system /sys/class/sec/led/led_b
-    chown system system /sys/class/sec/led/led_pattern
-    chown system system /sys/class/sec/led/led_blink
-    chown system system /sys/class/sec/led/led_lowpower
-
-    # IR_LED
-    chown system radio /sys/class/sec/sec_ir/ir_send
-    chown system radio /sys/class/sec/sec_ir/ir_send_result
-    chown system system /dev/ice4_dev
-    chmod 0660 /dev/ice4_dev
-
-    chown system camera /sys/class/flash/flash/flash_power
-    chmod 660 /sys/class/flash/flash/flash_power
-
-    # Create directories for perfd
-    mkdir /data/misc/perfd 2755 root system
-    mkdir /data/system/perfd 2770 root system
-
-    # Remove symlinks to avoid issues with migrate after nandroid restores
-    # Will be recreated at end of boot
-    # Normal path
-    rm /data/data/com.android.providers.telephony/databases
-    rm /data/data/com.android.providers.telephony/shared_prefs
-
-    # COMPAT: Handle upgrade from previous implementation of this idea. If the
-    # above could not be unlinked then we have the old symlinked files
-    # scenario. Clean that up.
-    rm /data/data/com.android.providers.telephony/databases/telephony.db
-    rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
-    rmdir /data/data/com.android.providers.telephony/databases
-    rmdir /data/data/com.android.providers.telephony/shared_prefs
-
-    setprop vold.post_fs_data_done 1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -131,6 +82,11 @@ on early-boot
     #chown root audio /sys/kernel/boot_adsp/boot
     setprop qcom.audio.init complete
     #setprop service.qti.ims.enabled 1
+
+    # Remove symlinks to avoid issues with migrate after nandroid restores
+    # Will be recreated at end of boot
+    rm /data/data/com.android.providers.telephony/databases/telephony.db
+    rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
 
 on boot
     # Bluetooth
@@ -756,9 +712,16 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics
  
-    # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
-    symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
-    symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
+    # Symlink telephony.db and preferred-apn.xml
+    mkdir /data/data/com.android.providers.telephony/databases 0700 radio radio
+    mkdir /data/data/com.android.providers.telephony/shared_prefs 0700 radio radio
+    symlink /data/user_de/0/com.android.providers.telephony/databases/telephony.db /data/data/com.android.providers.telephony/databases/telephony.db
+    symlink /data/user_de/0/com.android.providers.telephony/shared_prefs/preferred-apn.xml /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
+
+    # Fix file contexts for the directories; needed for upgrade from earlier
+    # 7.x versions, NOOP for clean flashes
+    restorecon /data/data/com.android.providers.telephony/databases
+    restorecon /data/data/com.android.providers.telephony/shared_prefs
 
 service charger /charger
     class charger
