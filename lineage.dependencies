@@ -1,22 +1,38 @@
 [
   {
-    "repository": "android_device_qcom_common",
+    "remote":     "github"
+    "repository": "LineageOS/android_device_qcom_common",
     "target_path": "device/qcom/common"
+    "branch":     "cm-14.1"
   },
   {
-    "repository": "android_device_samsung_qcom-common",
+    "remote":     "github" 
+    "repository": "LineageOS/android_device_samsung_qcom-common",
     "target_path": "device/samsung/qcom-common"
+    "branch":     "cm-14.1"    
   },
   {
-    "repository": "kernel_samsung_j5lte",
+    "remote":     "github"   
+    "repository": "J5-Dev/kernel_samsung_j5lte",
     "target_path": "kernel/samsung/j5lte"
+    "branch":     "cm-14.1"     
   },
   {
-    "repository": "android_external_stlport",
+    "remote":     "github"     
+    "repository": "LineageOS/android_external_stlport",
     "target_path": "external/stlport"
+    "branch":     "cm-14.1"     
   },
   {
-    "repository": "android_packages_resources_devicesettings",
+    "remote":     "github"  
+    "repository": "LineageOS/android_packages_resources_devicesettings",
     "target_path": "packages/resources/devicesettings"
+    "branch":     "cm-14.1"    
+  },
+  {
+    "remote":     "github"  
+    "repository": "LineageOS/android_external_sony_boringssl-compat",
+    "target_path": "external/sony/boringssl-compat"
+    "branch":     "cm-14.1"    
   }
 ]
