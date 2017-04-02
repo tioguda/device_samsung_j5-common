@@ -89,9 +89,6 @@ TARGET_POWERHAL_VARIANT := qcom
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
-# Enable HW based full disk encryption
-TARGET_HW_DISK_ENCRYPTION := true
-
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_HAS_QCOM_WLAN_SDK          := true
