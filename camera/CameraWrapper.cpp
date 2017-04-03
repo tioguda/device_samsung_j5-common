@@ -21,7 +21,7 @@
 *
 */
 
-#define LOG_NDEBUG 0
+//#define LOG_NDEBUG 0
 
 #define LOG_TAG "CameraWrapper"
 #include <cutils/log.h>
@@ -32,8 +32,6 @@
 #include <hardware/camera.h>
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
-#include <camera/CameraParametersExtra.h>
-
 
 static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
@@ -102,7 +100,16 @@ static int check_vendor_module()
     return rv;
 }
 
+static bool needYUV420preview(android::CameraParameters &params) {
+    int video_width, video_height;
+    params.getPreviewSize(&video_width, &video_height);
+    ALOGV("%s : PreviewSize is %x", __FUNCTION__, video_width*video_height);
+    return video_width*video_height <= 720*720;
+}
+
 #define KEY_VIDEO_HFR_VALUES "video-hfr-values"
+
+const static char * iso_values[] = {"auto,ISO_HJR,ISO100,ISO200,ISO400,ISO800,ISO1600,auto"};
 
 static char *camera_fixup_getparams(int id, const char *settings)
 {
@@ -115,9 +122,10 @@ static char *camera_fixup_getparams(int id, const char *settings)
 #endif
 
     // fix params here
-    params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION_STEP, "6");
-    params.set(android::CameraParameters::KEY_MIN_EXPOSURE_COMPENSATION, "-12");
-    params.set(android::CameraParameters::KEY_MAX_EXPOSURE_COMPENSATION, "12");
+    params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
+    params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION_STEP, "0.5");
+    params.set(android::CameraParameters::KEY_MIN_EXPOSURE_COMPENSATION, "-4");
+    params.set(android::CameraParameters::KEY_MAX_EXPOSURE_COMPENSATION, "4");
 
     /* If the vendor has HFR values but doesn't also expose that
      * this can be turned off, fixup the params to tell the Camera
@@ -129,9 +137,6 @@ static char *camera_fixup_getparams(int id, const char *settings)
         sprintf(tmp, "%s,off", hfrValues);
         params.set(KEY_VIDEO_HFR_VALUES, tmp);
     }
-
-    params.set(android::CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-              "1920x1080,1280x720,640x360,640x480,320x240,176x144");
 
     /* Enforce video-snapshot-supported to true */
     params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
@@ -158,8 +163,35 @@ static char *camera_fixup_setparams(struct camera_device *device, const char *se
     params.dump();
 #endif
 
-    params.set(android::CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-        "1920x1080,1280x720,640x360,640x480,528x432,320x240,176x144");
+    const char *recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
+    bool isVideo = recordingHint && !strcmp(recordingHint, "true");
+
+    if (isVideo) {
+        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_OFF);
+    } else {
+        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_ON);
+    }
+
+    if (needYUV420preview(params)) {
+        ALOGV("%s: switching preview format to yuv420p", __FUNCTION__);
+        params.set("preview-format", "yuv420p");
+    }
+
+    // fix params here
+    // No need to fix-up ISO_HJR, it is the same for userspace and the camera lib
+    if (params.get("iso")) {
+        const char *isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
+        if (strcmp(isoMode, "ISO100") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "100");
+        else if (strcmp(isoMode, "ISO200") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "200");
+        else if (strcmp(isoMode, "ISO400") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "400");
+        else if (strcmp(isoMode, "ISO800") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "800");
+        else if (strcmp(isoMode, "ISO1600") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "1600");
+    }
 
     android::String8 strParams = params.flatten();
 
