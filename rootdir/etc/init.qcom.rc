@@ -68,20 +68,6 @@ on fs
     # Audio NXP
     chmod 0666 /dev/i2c-1
     chown system system /dev/i2c-1
-
-on early-boot
-    # set RLIMIT_MEMLOCK to 64MB
-    setrlimit 8 67108864 67108864
-
-    # Allow subsystem (modem etc) debugging
-    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
-    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
-    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
-    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
-    write /sys/kernel/boot_adsp/boot 1
-    #chown root audio /sys/kernel/boot_adsp/boot
-    setprop qcom.audio.init complete
-    #setprop service.qti.ims.enabled 1
 	
     # Remove symlinks to avoid issues with migrate after nandroid restores
     # Will be recreated at end of boot
@@ -96,6 +82,20 @@ on early-boot
     rm /data/data/com.android.providers.telephony/shared_prefs/preferred-apn.xml
     rmdir /data/data/com.android.providers.telephony/databases
     rmdir /data/data/com.android.providers.telephony/shared_prefs
+
+on early-boot
+    # set RLIMIT_MEMLOCK to 64MB
+    setrlimit 8 67108864 67108864
+
+    # Allow subsystem (modem etc) debugging
+    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
+    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
+    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
+    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
+    write /sys/kernel/boot_adsp/boot 1
+    #chown root audio /sys/kernel/boot_adsp/boot
+    setprop qcom.audio.init complete
+    #setprop service.qti.ims.enabled 1
 
 on boot
     # Bluetooth
@@ -421,10 +421,7 @@ on boot
 
     # Start qcamerasvr
     start qcamerasvr
-
-    # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
-    symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
-    symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs
+	
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -611,6 +608,10 @@ on post-fs-data
     mkdir /dev/cpuctl/native
     mkdir /data/diag_logs 0777 system system 5
     setprop vold.post_fs_data_done 1
+	
+   # Symlink directories to access telephony.db and preferred-apn.xml required by cbd
+   symlink /data/user_de/0/com.android.providers.telephony/databases /data/data/com.android.providers.telephony/databases
+   symlink /data/user_de/0/com.android.providers.telephony/shared_prefs /data/data/com.android.providers.telephony/shared_prefs	
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -643,7 +644,6 @@ service config_bt_addr /system/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
-    oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
