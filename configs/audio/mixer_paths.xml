@@ -756,6 +756,12 @@
         <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
     </path>
 
+    <path name="headphones-for-ringtone">
+        <path name="headphones" />
+        <ctl name="RX1 Digital Volume" value="84" />
+        <ctl name="RX2 Digital Volume" value="84" />
+    </path>
+	
     <path name="speaker-and-headphones">
         <path name="spk-ear" />
         <ctl name="RX1 Digital Volume" value="62" />

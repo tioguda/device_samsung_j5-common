@@ -525,6 +525,12 @@
         <ctl name="HPHL" value="Switch" />
         <ctl name="HPHR" value="Switch" />
     </path>
+	
+    <path name="headphones-for-ringtone">
+        <path name="headphones" />
+        <ctl name="RX1 Digital Volume" value="84" />
+        <ctl name="RX2 Digital Volume" value="84" />
+    </path>
 
     <path name="headset-mic">
         <path name="adc2" />
