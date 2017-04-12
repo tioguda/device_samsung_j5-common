@@ -32,7 +32,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 998400
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 0
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 50000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 50000:45 800000:75 998400:90 1094400:80"
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 50000:45 800000:75 998400:90 1094400:80 1190400:98"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
     write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 50000
 
