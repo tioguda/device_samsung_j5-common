@@ -128,7 +128,8 @@ PRODUCT_PACKAGES += \
 
 # Configuration scripts
 PRODUCT_PACKAGES += \
-    init.qcom.bt.sh
+    init.qcom.bt.sh \
+    init.link_ril_db.sh
 
 # Ramdisk
 PRODUCT_PACKAGES += \
