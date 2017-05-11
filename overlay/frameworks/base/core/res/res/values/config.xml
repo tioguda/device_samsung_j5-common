@@ -285,6 +285,9 @@
 
     <!-- Disable dreams. -->
     <bool name="config_dreamsSupported">false</bool>
+     
+    <!-- Configuration to support SIM contact batch operation -->
+    <bool name="config_sim_phonebook_batch_operation">false</bool>
 
     <!-- Ambient display. -->
     <integer name="config_screenBrightnessDoze">30</integer>
