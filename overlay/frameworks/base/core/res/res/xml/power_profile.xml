@@ -18,6 +18,8 @@
         <value>2</value>
     </array>
     <array name="cpu.speeds">
+        <value>50000</value>
+        <value>100000</value>
         <value>200000</value>
         <value>400000</value>
         <value>533333</value>
