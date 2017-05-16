@@ -26,6 +26,7 @@ if [ $VARIANT == "j5ltexx" ]; then
 	rm -rf /system/lib/libnfc*.so
 	rm -rf /system/etc/libnfc*.conf
 	rm -rf /system/etc/nfcee*.xml
+	rm -rf /system/vendor/firmware/libpn548ad_fw.so
 	rm -rf /system/etc/permissions/com.android.nfc_extras.xml
 	rm -rf /system/etc/permissions/android.hardware.nfc.xml
 	rm -rf /system/etc/permissions/android.hardware.nfc.hce.xml
