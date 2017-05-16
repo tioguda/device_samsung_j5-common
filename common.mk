@@ -89,6 +89,13 @@ PRODUCT_PACKAGES += \
 # Healthd packages
 PRODUCT_PACKAGES += \
     charger_res_images
+	
+# Unify
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/releasetools/run_scripts.sh:install/bin/run_scripts.sh \
+    $(LOCAL_PATH)/releasetools/functions.sh:install/bin/functions.sh \
+    $(LOCAL_PATH)/releasetools/variant_hook.sh:install/bin/variant_hook.sh \
+    $(LOCAL_PATH)/releasetools/nfc/copy_nfc_configs.sh:install/bin/nfc/copy_nfc_configs.sh
 
 # Camera
 PRODUCT_PACKAGES += \
