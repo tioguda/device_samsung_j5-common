@@ -118,4 +118,3 @@ dalvik.vm.dex2oat-flags=--no-watch-dog
 
 # Samsung OEM
 ro.telephony.samsung.realcall=true
-ro.multisim.set_audio_params=true
