@@ -74,10 +74,6 @@ PRODUCT_PACKAGES += \
     memtrack.msm8916 \
     libtinyxml
 
-# Power
-PRODUCT_PACKAGES += \
-    power.msm8916
-
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8916
@@ -89,6 +85,10 @@ PRODUCT_PACKAGES += \
 # Healthd packages
 PRODUCT_PACKAGES += \
     charger_res_images
+	
+# Power
+PRODUCT_PACKAGES += \
+    power.msm8916
 	
 # Unify
 PRODUCT_COPY_FILES += \

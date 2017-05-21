@@ -89,11 +89,6 @@ AUDIO_FEATURE_ENABLED_FM := true
 BOARD_RIL_CLASS := ../../../device/samsung/j5-common/ril/
 USE_DEVICE_SPECIFIC_DATASERVICES := true
 
-# PowerHAL
-TARGET_POWERHAL_SET_INTERACTIVE_EXT := device/samsung/j5-common/configs/power/power_ext.c
-TARGET_POWERHAL_VARIANT := qcom
-#WITH_QC_PERF := true
-
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
