@@ -199,7 +199,7 @@
     <path name="deep-buffer-playback bt-sco">
         <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia1" value="1" />
     </path>
-
+	
     <path name="deep-buffer-playback bt-sco-wb">
         <path name="deep-buffer-playback bt-sco" />
     </path>
@@ -220,7 +220,7 @@
     <path name="deep-buffer-playback transmission-fm">
         <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia1" value="1" />
     </path>
-    
+
     <path name="deep-buffer-playback speaker-and-bt-sco">
 	<path name="deep-buffer-playback bt-sco" />
 	<path name="deep-buffer-playback" />
@@ -264,10 +264,10 @@
     <path name="low-latency-playback transmission-fm">
         <ctl name="INTERNAL_FM_RX Audio Mixer MultiMedia5" value="1" />
     </path>
-    
+
     <path name="low-latency-playback speaker-and-bt-sco">
-	<path name="low-latency-playback bt-sco" />
-	<path name="low-latency-playback" />
+        <path name="low-latency-playback bt-sco" />
+        <path name="low-latency-playback" />
     </path>
 
     <!-- tunnel -->
@@ -994,7 +994,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="84" />
         <ctl name="RX2 Digital Volume" value="84" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="voice-call-dock">
@@ -1179,7 +1179,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="84" />
         <ctl name="RX2 Digital Volume" value="84" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="video-call-dock">
@@ -1255,7 +1255,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="84" />
         <ctl name="RX2 Digital Volume" value="84" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="VoLTE-voice-dock">
@@ -1326,7 +1326,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="84" />
         <ctl name="RX2 Digital Volume" value="84" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="VoLTE-video-dock">
@@ -1387,14 +1387,14 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="TTY-full">
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <!-- TX part -->
@@ -1451,7 +1451,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="voip-handset-chaton">
@@ -1468,7 +1468,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="voip-handset-callforwarding">
@@ -1485,7 +1485,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="voip-handset-webex">
@@ -1502,7 +1502,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="voip-handset-carrier">
@@ -1519,7 +1519,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <path name="voip-handset-nonpcm">
@@ -1536,7 +1536,7 @@
         <path name="ear" />
         <ctl name="RX1 Digital Volume" value="86" />
         <ctl name="RX2 Digital Volume" value="86" />
-        <ctl name="EAR PA Gain" value="POS_1P5_DB" />	
+        <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     </path>
 
     <!-- TX part -->
@@ -1595,7 +1595,7 @@
     </path>
 
     <path name="voip-sub-mic-chaton">
-         <path name="main-mic" />
+        <path name="main-mic" />
         <ctl name="DEC1 Volume" value="84" />
         <ctl name="ADC1 Volume" value="4" />
     </path>
