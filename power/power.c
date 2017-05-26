@@ -27,6 +27,10 @@
 #include "power.h"
 #include "power_device.h"
 
+#define TK_POWER "/sys/class/input/input2/enabled"
+#define TS_POWER "/sys/class/input/input4/enabled"
+#define GPIO_KEYS_POWER "/sys/class/input/input7/enabled"
+
 #define CPUFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/"
 #define INTERACTIVE_PATH "/sys/devices/system/cpu/cpufreq/interactive/"
 
@@ -90,6 +94,13 @@ static int boostpulse_open()
     return boostpulse_fd;
 }
 
+static void power_set_interactive_ext(int on) {
+    ALOGD("%s: %s input devices", __func__, on ? "enabling" : "disabling");
+    sysfs_write(TK_POWER, on ? "1" : "0");
+    sysfs_write(TS_POWER, on ? "1" : "0");
+    sysfs_write(GPIO_KEYS_POWER, on ? "1" : "0");
+}
+
 static void power_set_interactive(__attribute__((unused)) struct power_module *module, int on)
 {
     if (!is_profile_valid(current_power_profile)) {
@@ -97,6 +108,8 @@ static void power_set_interactive(__attribute__((unused)) struct power_module *m
         return;
     }
 
+    power_set_interactive_ext(on);
+	
     if (on) {
         sysfs_write_int(INTERACTIVE_PATH "hispeed_freq",
                         profiles[current_power_profile].hispeed_freq);
