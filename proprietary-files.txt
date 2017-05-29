@@ -359,6 +359,9 @@ lib/libmysound.so
 lib/soundfx/libaudioeffectoffload.so
 lib/soundfx/libmyspace.so
 lib/libsoundalive.so
+-app/TimeService/TimeService.apk
+-vendor/lib/libtime_genoff.so
+-vendor/lib/libmm-abl.so
 lib/soundfx/libaudiosa_sec.so
 vendor/lib/libaudioalsa.so
 lib/libtinyalsa.so
