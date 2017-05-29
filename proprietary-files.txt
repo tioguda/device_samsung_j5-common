@@ -15,7 +15,6 @@ bin/loc_launcher
 bin/netmgrd
 bin/qmiproxy
 bin/radish
-bin/rfs_access
 bin/rmt_storage
 bin/time_daemon
 bin/ssr_diag
