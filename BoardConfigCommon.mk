@@ -55,6 +55,9 @@ BOARD_KERNEL_PAGESIZE        := 2048
 BOARD_FLASH_BLOCK_SIZE       := 131072
 BLOCK_BASED_OTA              := true
 
+# Malloc Implementation
+MALLOC_SVELTE := true
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/j5-common/configs/bluetooth
 BOARD_HAVE_BLUETOOTH := true
