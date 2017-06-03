@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.slimroms.doze.oneplus;
+package com.slimroms.doze.samsung;
 
 import android.app.ActionBar;
 import android.os.Bundle;
@@ -97,4 +97,4 @@ public class WakeUpGestureSettings extends PreferenceActivity {
             return ret;
         }
     };
-}
+} 

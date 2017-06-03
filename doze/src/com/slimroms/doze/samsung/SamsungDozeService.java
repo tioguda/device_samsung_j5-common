@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.slimroms.doze.oneplus;
+package com.slimroms.doze.samsung;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -35,8 +35,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnePlusDozeService extends Service {
-    private static final String TAG = "OnePlusDozeService";
+public class SamsungDozeService extends Service {
+    private static final String TAG = "SamsungDozeService";
     private static final boolean DEBUG = false;
 
     private static final String GESTURE_HAND_WAVE_KEY = "gesture_hand_wave";
@@ -45,21 +45,21 @@ public class OnePlusDozeService extends Service {
     private static final int POCKET_DELTA_NS = 1000 * 1000 * 1000;
 
     private Context mContext;
-    private OnePlusProximitySensor mSensor;
+    private SamsungProximitySensor mSensor;
     private PowerManager mPowerManager;
     private PowerManager.WakeLock mWakeLock;
 
     private boolean mHandwaveGestureEnabled = false;
     private boolean mPocketGestureEnabled = false;
 
-    class OnePlusProximitySensor implements SensorEventListener {
+    class SamsungProximitySensor implements SensorEventListener {
         private SensorManager mSensorManager;
         private Sensor mSensor;
 
         private boolean mSawNear = false;
         private long mInPocketTime = 0;
 
-        public OnePlusProximitySensor(Context context) {
+        public SamsungProximitySensor(Context context) {
             mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
             mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         }
@@ -108,11 +108,11 @@ public class OnePlusDozeService extends Service {
 
     @Override
     public void onCreate() {
-        if (DEBUG) Log.d(TAG, "OnePlusDozeService Started");
+        if (DEBUG) Log.d(TAG, "SamsungDozeService Started");
         mContext = this;
         mPowerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
-        mSensor = new OnePlusProximitySensor(mContext);
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "OnePlusDozeWakeLock");
+        mSensor = new SamsungProximitySensor(mContext);
+        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SamsungDozeWakeLock");
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         loadPreferences(sharedPrefs);
         sharedPrefs.registerOnSharedPreferenceChangeListener(mPrefListener);
@@ -200,4 +200,4 @@ public class OnePlusDozeService extends Service {
             }
         }
     };
-}
+} 

@@ -37,4 +37,4 @@
             android:summary="@string/pocket_gesture_summary" />
     </PreferenceCategory>
 
-</PreferenceScreen>
+</PreferenceScreen> 
