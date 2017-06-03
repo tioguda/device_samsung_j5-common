@@ -30,6 +30,9 @@
 #define CPUFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/"
 #define INTERACTIVE_PATH "/sys/devices/system/cpu/cpufreq/interactive/"
 
+/* gpio keys */
+#define GPIO_KEYS_POWER "/sys/class/input/input7/enabled"
+
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 static int boostpulse_fd = -1;
 
@@ -90,6 +93,11 @@ static int boostpulse_open()
     return boostpulse_fd;
 }
 
+static void power_set_interactive_ext(int on) {
+    ALOGD("%s: %s input devices", __func__, on ? "enabling" : "disabling");
+    sysfs_write_str(GPIO_KEYS_POWER, on ? "1" : "0");
+}
+
 static void power_set_interactive(__attribute__((unused)) struct power_module *module, int on)
 {
     if (!is_profile_valid(current_power_profile)) {
@@ -97,6 +105,8 @@ static void power_set_interactive(__attribute__((unused)) struct power_module *m
         return;
     }
 
+    power_set_interactive_ext(on);
+	
     if (on) {
         sysfs_write_int(INTERACTIVE_PATH "hispeed_freq",
                         profiles[current_power_profile].hispeed_freq);
