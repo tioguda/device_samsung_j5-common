@@ -120,3 +120,11 @@ dalvik.vm.dex2oat-flags=--no-watch-dog
 
 # Samsung OEM
 ro.telephony.samsung.realcall=true
+
+# hardware info
+ro.device.chipset=Qualcomm Snapdragon 410 MSM8916
+ro.device.cpu=Quad-core 1.2 GHz Cortex-A53
+ro.device.gpu=Qualcomm Adreno 306
+ro.device.rear_cam=13 MP, LED flash, 4128 x 3096 pixels, autofocus
+ro.device.front_cam=5 MP, LED flash
+ro.device.screen_res=720 x 1280 pixels
