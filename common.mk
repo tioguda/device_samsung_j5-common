@@ -46,6 +46,10 @@ PRODUCT_COPY_FILES += \
 # Doze
 PRODUCT_PACKAGES += \
     SamsungDoze
+
+# Substratum
+PRODUCT_PACKAGES += \
+    Substratum
 	
 # Touch issue workaround
 PRODUCT_PACKAGES += \
