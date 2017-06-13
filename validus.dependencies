@@ -13,15 +13,15 @@
   },
   {
     "remote":     "github",
-    "repository": "j5-Dev-Stable/proprietary_vendor_samsung_j5-common",
+    "repository": "j5-Dev/proprietary_vendor_samsung_j5-common",
     "target_path": "vendor/samsung/j5-common",
     "branch":     "cm-14.1"
   },
   {
     "remote":     "github",
-    "repository": "j5-Dev-Stable/kernel_samsung_j5lte",
+    "repository": "tioguda/kernel_samsung_j5lte",
     "target_path": "kernel/samsung/j5lte",
-    "branch":     "cm-14.1-new"     
+    "branch":     "GZR-7.1"     
   },
   {
     "remote":     "github",
