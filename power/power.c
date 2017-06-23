@@ -36,8 +36,8 @@
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 static int boostpulse_fd = -1;
 
-static int current_power_profile = -1;
-static int requested_power_profile = -1;
+static int current_power_profile = PROFILE_BALANCED;
+static int requested_power_profile = PROFILE_BALANCED;
 
 static int sysfs_write_str(char *path, char *s)
 {
