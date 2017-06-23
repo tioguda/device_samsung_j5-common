@@ -63,7 +63,6 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/j5-common/configs/
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BLUETOOTH_HCI_USE_MCT := true
-QCOM_BT_USE_BTNV := true
 
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -72,16 +71,19 @@ EXTENDED_FONT_FOOTPRINT := true
 TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)/releasetools
 
 # CMHW
-BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS += \
-    hardware/cyanogen/cmhw \
-    $(LOCAL_PATH)/cmhw
+BOARD_HARDWARE_CLASS += device/samsung/j5-common/cmhw
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
 TARGET_QCOM_AUDIO_VARIANT := caf
 USE_CUSTOM_AUDIO_POLICY := 1
+
+# Boot animation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_WIDTH := 720
 
 # Enable QCOM FM feature
 TARGET_QCOM_NO_FM_FIRMWARE := true
@@ -146,6 +148,7 @@ TARGET_SWV8_DISK_ENCRYPTION := true
 
 # Display
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
@@ -164,40 +167,25 @@ BOARD_SEPOLICY_DIRS += \
 # Misc.
 TARGET_SYSTEM_PROP := device/samsung/j5-common/system.prop
 
-# TWRP
-# Display
-TW_THEME := portrait_hdpi
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
-TW_BRIGHTNESS_PATH := "/sys/devices/soc.0/1a00000.qcom\x2cmdss_mdp/qcom\x2cmdss_fb_primary.137/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 255
-TW_NEW_ION_HEAP := true
-TW_TARGET_USES_QCOM_BSP := true
-
 # Keys
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Storage
 #RECOVERY_VARIANT := twrp
-#TARGET_RECOVERY_FSTAB := device/samsung/j5-common/configs/recovery/twrp.fstab
 TARGET_RECOVERY_FSTAB := device/samsung/j5-common/rootdir/etc/fstab.qcom
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_MTP_DEVICE := "/dev/mtp_usb"
 BOARD_MTP_DEVICE := "/dev/mtp_usb"
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_USERIMAGES_USE_F2FS := true
+
+# TWRP Support - Optional
+ifeq ($(RECOVERY_VARIANT),twrp)
+-include $(LOCAL_PATH)/twrp.mk
+endif
 
 # Misc.
 BOARD_USES_MMC_UTILS := true
 BOARD_SUPPRESS_EMMC_WIPE := true
 BOARD_HAS_NO_MISC_PARTITION := true
-TW_HAS_DOWNLOAD_MODE := true
-TW_NO_REBOOT_BOOTLOADER := true
-TW_INCLUDE_CRYPTO := true
-TW_NO_USB_STORAGE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_RECOVERY_SWIPE := true
 

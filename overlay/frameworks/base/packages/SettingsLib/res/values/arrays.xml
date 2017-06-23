@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
-** Copyright 2009, The Android Open Source Project
+**
+** Copyright 2015 The Android Open Source Project
+**           2017 The LineageOS Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -16,14 +18,12 @@
 ** limitations under the License.
 */
 -->
-
-<!-- These resources are around just to allow their values to be customized -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-     <!-- Threshold in milli watts below which a charger is rated as "slow" -->
-    <integer name="config_chargingSlowlyThreshold">1305</integer>
-
-    <!-- Threshold in milli watts from which a charger is rated as "fast" -->
-    <integer name="config_chargingFastThreshold">3045</integer>
-
+<resources>
+    <!-- IDs for each color mode. The values must match the corresponding constants in
+         android.view.Display -->
+    <integer-array name="color_mode_ids">
+        <item>0</item>
+        <item>-1</item>
+        <item>-1</item>
+    </integer-array>
 </resources>
