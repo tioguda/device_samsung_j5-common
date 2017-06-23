@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016, The CyanogenMod Project
+ * Copyright (C) 2014, The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@
 #include <camera/Camera.h>
 #include <camera/CameraParameters.h>
 
-using namespace android;
-
-static Mutex gCameraWrapperLock;
+static android::Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
 
 static char **fixed_set_params = NULL;
@@ -44,23 +42,26 @@ static int camera_device_open(const hw_module_t *module, const char *name,
         hw_device_t **device);
 static int camera_get_number_of_cameras(void);
 static int camera_get_camera_info(int camera_id, struct camera_info *info);
+static int camera_send_command(struct camera_device *device, int32_t cmd,
+        int32_t arg1, int32_t arg2);
 
 static struct hw_module_methods_t camera_module_methods = {
-    .open = camera_device_open
+    .open = camera_device_open,
 };
 
 camera_module_t HAL_MODULE_INFO_SYM = {
     .common = {
-        .tag = HARDWARE_MODULE_TAG,
-        .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
-        .hal_api_version = HARDWARE_HAL_API_VERSION,
-        .id = CAMERA_HARDWARE_MODULE_ID,
-        .name = "Samsung MSM8916 Camera Wrapper",
-        .author = "The CyanogenMod Project",
-        .methods = &camera_module_methods,
-        .dso = NULL, /* remove compilation warnings */
-        .reserved = {0}, /* remove compilation warnings */
+         .tag = HARDWARE_MODULE_TAG,
+         .module_api_version = CAMERA_MODULE_API_VERSION_1_0,
+         .hal_api_version = HARDWARE_HAL_API_VERSION,
+         .id = CAMERA_HARDWARE_MODULE_ID,
+         .name = "Samsung MSM8916 Camera Wrapper",
+         .author = "The CyanogenMod Project",
+         .methods = &camera_module_methods,
+         .dso = NULL, /* remove compilation warnings */
+         .reserved = {0}, /* remove compilation warnings */
     },
+
     .get_number_of_cameras = camera_get_number_of_cameras,
     .get_camera_info = camera_get_camera_info,
     .set_callbacks = NULL, /* remove compilation warnings */
@@ -95,7 +96,7 @@ static int check_vendor_module()
     rv = hw_get_module_by_class("camera", "vendor",
             (const hw_module_t**)&gVendorModule);
     if (rv)
-        ALOGE("%s: failed to open vendor camera module", __FUNCTION__);
+        ALOGE("failed to open vendor camera module");
     return rv;
 }
 
@@ -104,80 +105,105 @@ static bool needYUV420preview(android::CameraParameters &params) {
     params.getPreviewSize(&video_width, &video_height);
     ALOGV("%s : PreviewSize is %x", __FUNCTION__, video_width*video_height);
     return video_width*video_height <= 720*720;
+}
 
-static char *camera_fixup_getparams(int id __unused, const char *settings)
+#define KEY_VIDEO_HFR_VALUES "video-hfr-values"
+
+const static char * iso_values[] = {"auto,ISO_HJR,ISO100,ISO200,ISO400,ISO800,ISO1600,auto"};
+
+static char *camera_fixup_getparams(int id, const char *settings)
 {
-    CameraParameters params;
-    params.unflatten(String8(settings));
+    android::CameraParameters params;
+    params.unflatten(android::String8(settings));
 
 #if !LOG_NDEBUG
     ALOGV("%s: original parameters:", __FUNCTION__);
     params.dump();
 #endif
 
-    params.remove(CameraParameters::KEY_QC_LONGSHOT_SUPPORTED);
-    params.remove(CameraParameters::KEY_AUTO_WHITEBALANCE_LOCK_SUPPORTED);
+    // fix params here
+    params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
+    params.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION_STEP, "0.5");
+    params.set(android::CameraParameters::KEY_MIN_EXPOSURE_COMPENSATION, "-4");
+    params.set(android::CameraParameters::KEY_MAX_EXPOSURE_COMPENSATION, "4");
 
-    params.set(CameraParameters::KEY_SUPPORTED_SCENE_MODES, "auto,hdr");
-
-    const char *manualFocusPosition =
-            params.get(CameraParameters::KEY_QC_MANUAL_FOCUS_POSITION);
-    const char *manualFocusPositionType =
-            params.get(CameraParameters::KEY_QC_MANUAL_FOCUS_POS_TYPE);
-    if (manualFocusPositionType != NULL) {
-        if (!strcmp(manualFocusPositionType, "2")) {
-            if (manualFocusPosition != NULL) {
-                params.set(CameraParameters::KEY_QC_FOCUS_POSITION_SCALE, manualFocusPosition);
-            } else {
-                params.set(CameraParameters::KEY_QC_FOCUS_POSITION_SCALE, "0");
-            }
-        } else if (!strcmp(manualFocusPositionType, "3")) {
-            if (manualFocusPosition != NULL) {
-                params.set(CameraParameters::KEY_QC_FOCUS_POSITION_DIOPTER, manualFocusPosition);
-            } else {
-                params.set(CameraParameters::KEY_QC_FOCUS_POSITION_DIOPTER, "0");
-            }
-        }
+    /* If the vendor has HFR values but doesn't also expose that
+     * this can be turned off, fixup the params to tell the Camera
+     * that it really is okay to turn it off.
+     */
+    const char *hfrValues = params.get(KEY_VIDEO_HFR_VALUES);
+    if (hfrValues && *hfrValues && ! strstr(hfrValues, "off")) {
+        char tmp[strlen(hfrValues) + 4 + 1];
+        sprintf(tmp, "%s,off", hfrValues);
+        params.set(KEY_VIDEO_HFR_VALUES, tmp);
     }
+
+    /* Enforce video-snapshot-supported to true */
+    params.set(android::CameraParameters::KEY_VIDEO_SNAPSHOT_SUPPORTED, "true");
+
+    android::String8 strParams = params.flatten();
+    char *ret = strdup(strParams.string());
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
     params.dump();
 #endif
-
-    String8 strParams = params.flatten();
-    char *ret = strdup(strParams.string());
 
     return ret;
 }
 
-static char *camera_fixup_setparams(int id, const char *settings)
+static char *camera_fixup_setparams(struct camera_device *device, const char *settings)
 {
-    CameraParameters params;
-    params.unflatten(String8(settings));
+    int id = CAMERA_ID(device);
+    android::CameraParameters params;
+    params.unflatten(android::String8(settings));
 
 #if !LOG_NDEBUG
     ALOGV("%s: original parameters:", __FUNCTION__);
     params.dump();
 #endif
 
-    const char *sceneMode = params.get(CameraParameters::KEY_SCENE_MODE);
-    if (sceneMode != NULL) {
-        if (!strcmp(sceneMode, CameraParameters::SCENE_MODE_HDR)) {
-            params.remove(CameraParameters::KEY_QC_HDR_NEED_1X);
-        }
+    const char *recordingHint = params.get(android::CameraParameters::KEY_RECORDING_HINT);
+    bool isVideo = recordingHint && !strcmp(recordingHint, "true");
+
+    if (isVideo) {
+        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_OFF);
+    } else {
+        params.set(android::CameraParameters::KEY_ZSL, android::CameraParameters::ZSL_ON);
     }
+
+    if (needYUV420preview(params)) {
+        ALOGV("%s: switching preview format to yuv420p", __FUNCTION__);
+        params.set("preview-format", "yuv420p");
+    }
+
+    // fix params here
+    // No need to fix-up ISO_HJR, it is the same for userspace and the camera lib
+    if (params.get("iso")) {
+        const char *isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
+        if (strcmp(isoMode, "ISO100") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "100");
+        else if (strcmp(isoMode, "ISO200") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "200");
+        else if (strcmp(isoMode, "ISO400") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "400");
+        else if (strcmp(isoMode, "ISO800") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "800");
+        else if (strcmp(isoMode, "ISO1600") == 0)
+            params.set(android::CameraParameters::KEY_ISO_MODE, "1600");
+    }
+
+    android::String8 strParams = params.flatten();
+
+    if (fixed_set_params[id])
+        free(fixed_set_params[id]);
+    fixed_set_params[id] = strdup(strParams.string());
+    char *ret = fixed_set_params[id];
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
     params.dump();
 #endif
-
-    String8 strParams = params.flatten();
-    if (fixed_set_params[id])
-        free(fixed_set_params[id]);
-    fixed_set_params[id] = strdup(strParams.string());
-    char *ret = fixed_set_params[id];
 
     return ret;
 }
@@ -349,7 +375,6 @@ static int camera_auto_focus(struct camera_device *device)
     if (!device)
         return -EINVAL;
 
-
     return VENDOR_CALL(device, auto_focus);
 }
 
@@ -396,7 +421,7 @@ static int camera_set_parameters(struct camera_device *device,
         return -EINVAL;
 
     char *tmp = NULL;
-    tmp = camera_fixup_setparams(CAMERA_ID(device), params);
+    tmp = camera_fixup_setparams(device, params);
 
     int ret = VENDOR_CALL(device, set_parameters, tmp);
     return ret;
@@ -471,7 +496,7 @@ static int camera_device_close(hw_device_t *device)
 
     ALOGV("%s", __FUNCTION__);
 
-    Mutex::Autolock lock(gCameraWrapperLock);
+    android::Mutex::Autolock lock(gCameraWrapperLock);
 
     if (!device) {
         ret = -EINVAL;
@@ -515,7 +540,7 @@ static int camera_device_open(const hw_module_t *module, const char *name,
     wrapper_camera_device_t *camera_device = NULL;
     camera_device_ops_t *camera_ops = NULL;
 
-    Mutex::Autolock lock(gCameraWrapperLock);
+    android::Mutex::Autolock lock(gCameraWrapperLock);
 
     ALOGV("%s", __FUNCTION__);
 
@@ -571,7 +596,7 @@ static int camera_device_open(const hw_module_t *module, const char *name,
         memset(camera_ops, 0, sizeof(*camera_ops));
 
         camera_device->base.common.tag = HARDWARE_DEVICE_TAG;
-        camera_device->base.common.version = CAMERA_DEVICE_API_VERSION_1_0;
+        camera_device->base.common.version = HARDWARE_DEVICE_API_VERSION(1, 0);
         camera_device->base.common.module = (hw_module_t *)(module);
         camera_device->base.common.close = camera_device_close;
         camera_device->base.ops = camera_ops;
