@@ -43,12 +43,6 @@
   },
   {
     "remote":     "github",
-    "repository": "LineageOS/android_packages_apps_FlipFlap",
-    "target_path": "packages/apps/FlipFlap",
-    "branch":     "cm-14.1"    
-  },
-  {
-    "remote":     "github",
     "repository": "LineageOS/android_external_sony_boringssl-compat",
     "target_path": "external/sony/boringssl-compat",
     "branch":     "cm-14.1"    
