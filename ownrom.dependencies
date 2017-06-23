@@ -19,9 +19,9 @@
   },
   {
     "remote":     "github",
-    "repository": "j5-Dev-Stable/kernel_samsung_j5lte",
+    "repository": "tioguda/kernel_samsung_j5lte",
     "target_path": "kernel/samsung/j5lte",
-    "branch":     "cm-14.1-new"     
+    "branch":     "GZR-7.1"     
   },
   {
     "remote":     "github",
