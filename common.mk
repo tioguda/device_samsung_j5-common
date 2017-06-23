@@ -53,6 +53,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     InputDisabler
 
+# OTAUpdates
+PRODUCT_PACKAGES += \
+    OTAUpdates
+
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
