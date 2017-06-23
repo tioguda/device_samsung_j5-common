@@ -49,10 +49,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     SamsungDoze
 	
-# FlipFlap
-PRODUCT_PACKAGES += \
-    FlipFlap
-	
 # Touch issue workaround
 PRODUCT_PACKAGES += \
     InputDisabler
