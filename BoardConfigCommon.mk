@@ -76,7 +76,6 @@ BOARD_HARDWARE_CLASS += device/samsung/j5-common/cmhw
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_KPI_OPTIMIZE := true
-TARGET_QCOM_AUDIO_VARIANT := caf
 USE_CUSTOM_AUDIO_POLICY := 1
 
 # Boot animation
