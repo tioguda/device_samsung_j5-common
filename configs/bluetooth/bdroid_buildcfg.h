@@ -22,11 +22,13 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTM_DEF_LOCAL_NAME   "Samsung Galaxy J5"
+#define BTM_DEF_LOCAL_NAME "Samsung Galaxy J5"
 
 #define BTA_DISABLE_DELAY 1000 /* in milliseconds */
 #define BLUETOOTH_QTI_SW TRUE
+// Disables read remote device feature
 #define BTA_SKIP_BLE_READ_REMOTE_FEAT FALSE
 #define MAX_L2CAP_CHANNELS 16
+// skips conn update at conn completion
 #define BTA_BLE_SKIP_CONN_UPD FALSE
 #endif

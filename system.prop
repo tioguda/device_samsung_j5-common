@@ -118,9 +118,6 @@ persist.timed.enable=true
 ro.sys.fw.dex2oat_thread_count=4
 dalvik.vm.dex2oat-flags=--no-watch-dog
 
-# Samsung OEM
-ro.telephony.samsung.realcall=true
-
 # hardware info
 ro.device.chipset=Qualcomm Snapdragon 410 MSM8916
 ro.device.cpu=Quad-core 1.2 GHz Cortex-A53
