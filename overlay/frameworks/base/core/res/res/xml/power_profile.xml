@@ -21,12 +21,16 @@
         <value>50000</value>
         <value>100000</value>
         <value>200000</value>
+        <value>302400</value>
         <value>400000</value>
         <value>533333</value>
         <value>800000</value>
         <value>998400</value>
         <value>1094400</value>
-        <value>1190400</value>
+        <value>1152000</value>
+        <value>1209600</value>
+        <value>1363200</value>
+        <value>1401600</value>
     </array>
     <item name="cpu.idle">2</item>
     <item name="cpu.awake">17</item>
