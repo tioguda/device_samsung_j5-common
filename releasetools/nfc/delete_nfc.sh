@@ -33,3 +33,6 @@ if [ $VARIANT == "j5ltexx" ]; then
 	rm -rf /system/priv-app/*Nfc*
 	rm -rf /system/app/*Nfc*
 fi
+
+# Umount /system
+umount_fs system
