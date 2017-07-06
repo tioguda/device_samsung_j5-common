@@ -22,14 +22,14 @@
 mount_fs system
 
 if [ $VARIANT == "j5ltexx" ]; then
-	rm -rf /system/lib/hw/nfc_nci.MSM8916.so
-	rm -rf /system/lib/libnfc*.so
-	rm -rf /system/etc/libnfc*.conf
-	rm -rf /system/etc/nfcee*.xml
-	rm -rf /system/vendor/firmware/libpn548ad_fw.so
-	rm -rf /system/etc/permissions/com.android.nfc_extras.xml
-	rm -rf /system/etc/permissions/android.hardware.nfc.xml
-	rm -rf /system/etc/permissions/android.hardware.nfc.hce.xml
+	rm /system/lib/hw/nfc_nci.MSM8916.so
+	rm /system/lib/libnfc*.so
+	rm /system/etc/libnfc*.conf
+	rm /system/etc/nfcee*.xml
+	rm /system/vendor/firmware/libpn548ad_fw.so
+	rm /system/etc/permissions/com.android.nfc_extras.xml
+	rm /system/etc/permissions/android.hardware.nfc.xml
+	rm /system/etc/permissions/android.hardware.nfc.hce.xml
 	rm -rf /system/priv-app/*Nfc*
 	rm -rf /system/app/*Nfc*
 fi
