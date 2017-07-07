@@ -79,7 +79,6 @@ wifi.interface=wlan0
 
 # Bluetooth
 qcom.bluetooth.soc=smd
-ro.qualcomm.bt.hci_transport=smd
 ro.bluetooth.dun=true
 ro.bluetooth.hfp.ver=1.7
 ro.bluetooth.sap=true
@@ -90,6 +89,8 @@ ro.qualcomm.bluetooth.map=true
 ro.qualcomm.bluetooth.nap=true
 ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
+ro.qualcomm.bt.hci_transport=smd
+persist.bt.enableAptXHD=true
 
 # Misc.
 ro.chipname=MSM8916
