@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # vendorsetup.sh is sourced by build/envsetup.sh in root of android build tree. Hope that nobody can correctly source it not from root of android tree.
-build_root=$(pwd) 
+build_root=$(pwd)
 echo "======================= Applying patches: enum ======================="
 patches_path="$build_root/device/samsung/j5-common/patches/"
 
@@ -14,11 +14,11 @@ echo "======================= Applying patches: start ======================="
 
 for patch in `find -type f -name '*.patch'|cut -d / -f 2-|sort`; do
 	cd $patches_path
-	
+
 	# Strip patch title to get git commit title - git ignore [text] prefixes in beginning of patch title during git am
 	title=$(sed -rn "s/Subject: (\[[^]]+] *)*//p" "$patch")
 	absolute_patch_path="$patches_path/$patch"
-	
+
 	# Supported both path/to/repo_with_underlines/file.patch and path_to_repo+with+underlines/file.patch (both leads to path/to/repo_with_underlines)
 	repo_to_patch="$(if dirname $patch|grep -q /; then dirname $patch; else dirname $patch |tr '_' '/'|tr '+' '_'; fi)"
 

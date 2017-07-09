@@ -16,7 +16,7 @@ index fe63f55..1e47a75 100644
           }//switch
        }//handleMessage
     };
-+   
++
 +   @Override
 +   public boolean onKeyDown(int keyCode, KeyEvent event) {
 +      AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -208,7 +208,7 @@ index 426071b..4ab3da8 100644
                 Log.d(LOGTAG, "A2DP connected, de-select BT");
 -               AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NO_BT_A2DP);
 +               Log.d(LOGTAG, "FM_PATCH:resetAudioRoute() FORCE_NO_BT_A2DP");
-+               AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NO_BT_A2DP);    
++               AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NO_BT_A2DP);
             } else {
                 Log.d(LOGTAG, "A2DP is not connected, force none");
                 AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NONE);
@@ -231,8 +231,8 @@ index 426071b..4ab3da8 100644
 +          mAudioManager.setSpeakerphoneOn(false);
 +          mAudioManager.setParameters("fm_radio_volume=on");
 +          mAudioManager.setParameters("FMRadioVol=" + GetMusicStreamVol());
-+          
-+          
++
++
 +        Log.d(LOGTAG,"FM_PATCH:fmOperationsReset() MODE_IN_CALL");
 +        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
 +        Log.d(LOGTAG,"FM_PATCH:fmOperationsReset() MODE_IN_CALL OK");
@@ -368,4 +368,3 @@ index 426071b..4ab3da8 100644
           if (mResumeAfterCall)
 -- 
 2.11.0.windows.3
-
