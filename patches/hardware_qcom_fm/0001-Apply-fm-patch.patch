@@ -1,22 +1,21 @@
-From 4f0d16e2704ed2004b77683bfe8c112cb8c3af2d Mon Sep 17 00:00:00 2001
+From e5232aee79d1ada9804b4a7db4ed72bd9d80b5ce Mon Sep 17 00:00:00 2001
 From: SoUnd001 <sound0020@gmail.com>
 Date: Fri, 23 Jun 2017 15:19:41 +0300
 Subject: [PATCH] Apply fm patch
 
 ---
  fmapp2/src/com/caf/fmradio/FMRadio.java        |  17 +++
- fmapp2/src/com/caf/fmradio/FMRadioService.java | 157 ++++++++++++++++++++++++-
- 2 files changed, 171 insertions(+), 3 deletions(-)
+ fmapp2/src/com/caf/fmradio/FMRadioService.java | 155 ++++++++++++++++++++++++-
+ 2 files changed, 170 insertions(+), 2 deletions(-)
 
 diff --git a/fmapp2/src/com/caf/fmradio/FMRadio.java b/fmapp2/src/com/caf/fmradio/FMRadio.java
-index fe63f55..1e47a75 100644
+index fe63f55..e8e2dd3 100644
 --- a/fmapp2/src/com/caf/fmradio/FMRadio.java
 +++ b/fmapp2/src/com/caf/fmradio/FMRadio.java
-@@ -2687,6 +2687,23 @@ public class FMRadio extends Activity
-          }//switch
+@@ -2688,6 +2688,23 @@ public class FMRadio extends Activity
        }//handleMessage
     };
-+
+ 
 +   @Override
 +   public boolean onKeyDown(int keyCode, KeyEvent event) {
 +      AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -33,11 +32,12 @@ index fe63f55..1e47a75 100644
 +            return super.onKeyDown(keyCode, event);
 +      }
 +   }
- 
++
     private void resetFMStationInfoUI() {
        mTunedStation.setFrequency(FmSharedPreferences.getTunedFrequency());
+       mTunedStation.setName("");
 diff --git a/fmapp2/src/com/caf/fmradio/FMRadioService.java b/fmapp2/src/com/caf/fmradio/FMRadioService.java
-index 426071b..4ab3da8 100644
+index 426071b..49ab3ad 100644
 --- a/fmapp2/src/com/caf/fmradio/FMRadioService.java
 +++ b/fmapp2/src/com/caf/fmradio/FMRadioService.java
 @@ -99,6 +99,31 @@ import android.bluetooth.BluetoothA2dp;
@@ -206,9 +206,8 @@ index 426071b..4ab3da8 100644
         if (isSpeakerEnabled() == true) {
             if (mA2dpConnected == true) {
                 Log.d(LOGTAG, "A2DP connected, de-select BT");
--               AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NO_BT_A2DP);
 +               Log.d(LOGTAG, "FM_PATCH:resetAudioRoute() FORCE_NO_BT_A2DP");
-+               AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NO_BT_A2DP);
+                AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NO_BT_A2DP);
             } else {
                 Log.d(LOGTAG, "A2DP is not connected, force none");
                 AudioSystem.setForceUse(AudioSystem.FOR_MEDIA, AudioSystem.FORCE_NONE);
@@ -367,4 +366,4 @@ index 426071b..4ab3da8 100644
               mAudioTrack.setVolume(1.0f);
           if (mResumeAfterCall)
 -- 
-2.11.0.windows.3
+2.11.0
