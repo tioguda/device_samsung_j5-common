@@ -44,7 +44,7 @@
   {
     "remote":     "github",
     "repository": "TeslaRom-N/external_sony_boringssl-compat",
-    "target_path": "external/boringssl-compat",
+    "target_path": "external/sony/boringssl-compat",
     "branch":     "n7.1.2"    
   }
 ]
