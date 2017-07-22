@@ -51,10 +51,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Substratum
 
-# Touch issue workaround
-PRODUCT_PACKAGES += \
-    InputDisabler
-
 # OTAUpdates
 PRODUCT_PACKAGES += \
     OTAUpdates
