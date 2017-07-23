@@ -58,6 +58,14 @@ PRODUCT_PACKAGES += \
 # Default root Method := supersu/magisk
 DEFAULT_ROOT_METHOD := magisk
 
+# Adaway
+PRODUCT_COPY_FILES += \
+    vendor/tesla/prebuilt/common/app/adaway.apk:system/app/adaway.apk
+
+# KernelAdiutor
+PRODUCT_COPY_FILES += \
+    vendor/tesla/prebuilt/common/app/gzr_adiutor.apk:system/app/gzr_adiutor.apk
+
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
