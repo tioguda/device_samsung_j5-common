@@ -63,8 +63,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/common/app/adaway.apk:system/app/adaway.apk
 
 # KernelAdiutor
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/common/app/gzr_adiutor.apk:system/app/gzr_adiutor.apk
+PRODUCT_PACKAGES += \
+    KernelAdiutor
 
 # Audio
 PRODUCT_PACKAGES += \

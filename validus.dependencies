@@ -46,5 +46,17 @@
     "repository": "TeslaRom-N/external_sony_boringssl-compat",
     "target_path": "external/sony/boringssl-compat",
     "branch":     "n7.1.2"    
+  },
+  {
+    "remote":     "github",
+    "repository": "TeslaRom-N/KernelAdiutor",
+    "target_path": "packages/apps/KernelAdiutor",
+    "branch":     "n7.1.2"    
+  },
+  {
+    "remote":     "github",
+    "repository": "TeslaRom-N/FloatingActionButton",
+    "target_path": "packages/apps/FloatingActionButton",
+    "branch":     "n7.1.2"
   }
 ]
