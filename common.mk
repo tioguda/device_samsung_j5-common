@@ -285,6 +285,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=J5RIL
 
 # Camera
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	camera2.portability.force_api=0
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	camera2.portability.force_api=0
+
+# Camera
 PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.legacyencoder=true \
     media.stagefright.less-secure=true
