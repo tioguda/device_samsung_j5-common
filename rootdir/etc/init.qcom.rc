@@ -47,7 +47,7 @@ on init
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-	
+
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
 
@@ -82,7 +82,7 @@ on early-boot
     #chown root audio /sys/kernel/boot_adsp/boot
     setprop qcom.audio.init complete
     #setprop service.qti.ims.enabled 1
-	
+
     # setup permissions for fb1 related nodes
     chown system graphics /sys/class/graphics/fb1/hpd
     chown system system /sys/class/graphics/fb1/hdcp/tp
@@ -95,7 +95,7 @@ on early-boot
 
     # Change owner and group for media server and surface flinger
     chown system system /sys/devices/virtual/graphics/fb1/format_3d
-	
+
     # Set the property to indicate type of virtual display to 0
     # 0 indicates that virtual display is not a Wifi display and that the
     # session is not exercised through RemoteDisplay in the android framework
@@ -427,7 +427,7 @@ on boot
 
     # Start qcamerasvr
     start qcamerasvr
-	
+
 # link  the telephony database
     start link_ril_db
 
@@ -633,7 +633,7 @@ on property:bluetooth.isEnabled=true
 
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
-	
+
 # FM
 on property:hw.fm.init=0
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
@@ -719,6 +719,11 @@ service loc_launcher /system/bin/loc_launcher
     # loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet net_raw qcom_diag net_admin wifi
+
+# Enable Touch Devices
+    write /sys/class/touch_disabler/control manual
+    write /sys/class/touch_disabler/enabled true
+    write /sys/class/touch_disabler/control auto
 
 service hostapd /system/bin/hostapd -dd /data/misc/wifi/hostapd.conf
     class late_start
